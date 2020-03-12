@@ -89,47 +89,48 @@
       </div>
     </div>
 
-    <div class="perfil-area">
-      <div class="zigzag-bottom"></div>
-      <div class="container">
-        <div class="col f-flex justify-content-center">
-          <input type="file" onchange="readURL(this);" />
-          <img id="blah" src="#" alt="Subir imagen" />
-        </div>
-      </div>
-    </div>
-
-    <div class="single-sidebar" style=" align-self: center; ">
+    <div class="single-sidebar" style="align-self: center; ">
       <form action="">
-        <h3 class="sidebar-title">Descripción</h3>
-        <input type="text" placeholder="" />
+        <div class="container" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
+          <div class="container" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
+            <img id="blah" src="#" alt="Subir imagen" />
+          </div>
+          <input type="file" onchange="readURL(this);" />
+        </div>
+        <div style="margin-left: 72px;margin-right: 72px;">
+          <h3 class="sidebar-title">Descripción</h3>
+          <input type="text" placeholder="" />
+        </div>
         <div class="container">
-          <div class="col f-flex justify-content-center">
+          <div class="col">
             <div class="row">
-              <div class="col-md-3 col-sm-6">
+              <div class="col-md-6 col-sm-6">
                 <h3 class="sidebar-title">Marca</h3>
                 <input type="text" placeholder="" />
               </div>
 
-              <div class="col-md-3 col-sm-6">
+              <div class="col-md-6 col-sm-6">
                 <h3 class="sidebar-title">Modelo</h3>
                 <input type="text" placeholder="" />
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3 col-sm-6">
-                <h3 class="sidebar-title">Año</h3>
+              <div class="col-md-6 col-sm-6">
+                <h3 class="sidebar-title">Ano</h3>
                 <input type="text" placeholder="" />
               </div>
 
-              <div class="col-md-3 col-sm-6">
+              <div class="col-md-6 col-sm-6">
                 <h3 class="sidebar-title">Precio por hora</h3>
                 <input type="text" placeholder="" />
               </div>
             </div>
+            
           </div>
         </div>
-        <input type="submit" value="Añadir" />
+        <div style="margin-left: 72px;">
+          <input type="submit" value="Añadir" />
+        </div>
       </form>
     </div>
 
@@ -167,7 +168,6 @@
           reader.onload = function(e) {
             $("#blah")
               .attr("src", e.target.result)
-              .width(200)
               .height(200);
           };
 
