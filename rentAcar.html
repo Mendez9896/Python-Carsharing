@@ -102,44 +102,37 @@
                                         <p> Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">Mustang</a>, <a href="">Ford</a>. </p>
                                     </div> 
                                     
-                                    <div role="tabpanel">
-                                        <ul class="product-tab" role="tablist">
-                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
-                                        </ul>
-                                        <div class="tab-content" style="width: 700px;">
-                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                                <h2>Ford Mustang</h2>  
-                                                <p>El Ford Mustang es un automóvil deportivo de la casa estadounidense Ford. Originalmente fue concebido por Lee Iacocca como un concurso entre departamento como algo personal y deportivo y que atraería a las mujeres. El Mustang debutó en 1964 con un precio de $2,368 dólares, con ventas anuales estimadas de 100K. Las ventas del primer año superaron las 400 mil unidades y fueron de un millón en dos años.
 
-                                                    El Mustang creó la clase de Autos Pony de autos estadounidenses, distinguidos como coupés deportivos accesibles con capotas largas y cubiertas traseras cortas, y dio lugar a competidores como el Chevrolet Camaro, Pontiac Firebird, AMC Javelin, Plymouth Barracuda renovado de Chrysler y la segunda generación de Dodge Challenger. El Mustang también es acreditado por inspirar los diseños de coupés Toyota Celica y el Ford Capri, que fueron importados a los Estados Unidos. </p>
-
-                                                <p>Originalmente se basó en la plataforma del Ford Falcon estadounidense de segunda generación, un automóvil compacto. El Ford Mustang I original de dos plazas de 1962 había evolucionado hasta convertirse en el "concept car" de cuatro plazas Mustang II de 1963 que Ford utilizó para probar como el público se interesaría en el primer Mustang de producción. El concept car Mustang II de 1963 fue diseñado con una variación de los extremos delantero y trasero del modelo de producción con un techo que era 2.7 pulgadas más corto. Introducido temprano el 17 de abril de 1964, (16 días después del Barracuda de Plymouth), y por lo tanto denominado como un "1964 1/2" por los aficionados Mustang. Pero el Mustang 1965 fue el lanzamiento más exitoso de la automotriz desde el modelo Ford A. el Mustang ha sufrido varias transformaciones a su sexta generación actual, siendo la tercera saga de Ford más antigua. </p>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="profile">
-                                                <h2>Reviews</h2>
-                                                <div class="submit-review">
-                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                    <div class="rating-chooser">
-                                                        <p>Your rating</p>
-
-                                                        <div class="rating-wrap-post">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                    <p><input type="submit" value="Submit"></p>
+                                    <div id="payment" style="width: 500px;">
+                                        <ul class="payment_methods methods">
+                                            <li class="payment_method_bacs">
+                                                <input type="radio" data-order_button_text="" checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs">
+                                                <label for="payment_method_bacs">Transferencia bancaria </label>
+                                             
+                                            </li>
+                                            <li class="payment_method_cheque">
+                                                <input type="radio" data-order_button_text="" value="cheque" name="payment_method" class="input-radio" id="payment_method_cheque">
+                                                <label for="payment_method_cheque">Pago al recoger el vehiculo</label>
+                                                <div style="display:none;" class="payment_box payment_method_cheque">
+                                                    <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            </li>
+                                            <li class="payment_method_paypal">
+                                                <input type="radio" data-order_button_text="Proceed to PayPal" value="paypal" name="payment_method" class="input-radio" id="payment_method_paypal">
+                                                <label for="payment_method_paypal">PayPal <img alt="PayPal Acceptance Mark" src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png"><a title="What is PayPal?" onclick="javascript:window.open('https://www.paypal.com/gb/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;" class="about_paypal" href="https://www.paypal.com/gb/webapps/mpp/paypal-popup">What is PayPal?</a>
+                                                </label>
+                                                <div style="display:none;" class="payment_box payment_method_paypal">
+                                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+
+                                        <div class="clear"></div>
+
                                     </div>
                                                                         
-                                    <a  href="rentAcar.html"><button class="add_to_cart_button" type="submit">Rentar</button></a>
+                                    <a  href="index.html"><button class="add_to_cart_button" type="submit">Rentar</button></a>
   
                                     
                                     
