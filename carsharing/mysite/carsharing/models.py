@@ -42,3 +42,20 @@ class Alquiler(models.Model):
 
     class Meta:
         verbose_name_plural = "Alquileres"
+
+class Pago(models.Model):
+    codigo = models.IntegerField()
+    precio = models.IntegerField()
+    numeroTarjeta = models.IntegerField()
+    tipoTarjeta = models.TextField()
+    class Meta:
+        verbose_name_plural = "Pagos"
+
+
+class Propietario(models.Model):
+    codigo = models.IntegerField()
+    class Meta:
+        verbose_name_plural = "Propietarios"
+
+
+
