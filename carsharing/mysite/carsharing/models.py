@@ -3,14 +3,14 @@ from django.db import models
 # Create your models here.
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50)
-    codigo = models.IntegerField()
+    codigo = models.AutoField(auto_created=True, primary_key=True)
     password = models.CharField(max_length=20)
-    email = models.CharField(max_length=50)
+    email = models.EmailField()
     contacto = models.IntegerField()
     rol = models.BooleanField()
 
     def __str__(self):
-        return self.nombre
+        return str(self.codigo)
 
     class Meta:
         verbose_name_plural = "Usuarios"
