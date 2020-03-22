@@ -3,9 +3,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('index', views.index, name='index'),
     path('sign-in', views.signIn, name='sign-in'),
-    path('log-in', views.logIn, name='log-in'),
+    path('', views.logIn, name='log-in'),
     path('perfil', views.perfil, name='perfil'),
     path('single-product', views.singleProduct, name='single-product'),
     path('add-car', views.addCar, name='add-car'),
