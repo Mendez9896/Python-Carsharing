@@ -26,6 +26,7 @@ class Ciudad(models.Model):
         verbose_name_plural = "Ciudades"
 
 class Vehiculo(models.Model):
+    foto = models.BinaryField()
     propietario = models.ForeignKey(Usuario,on_delete=models.CASCADE)
     descripcion = models.TextField()
     marca = models.CharField(max_length=50)
