@@ -85,47 +85,89 @@
     </div>
 
     <div class="single-sidebar" style="align-self: center; ">
-      <form action="">
-        <div class="container" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
-          <div class="container" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
-            <img id="blah" src="#" alt="Subir imagen" />
+      <form action="/perfil" method="post" enctype="multipart/form-data" style="align: center">
+        {% csrf_token %}
+          <div class="container" style="align: center; padding-top: 20px; padding-bottom: 20px;">
+            <div class ="row" style = "align:center;">
+              <div class=" col-md-6 col-sm-6"  style="align: center;">
+                <div>
+                Sube una imagen de tu vehiculo:
+                </div>
+                <img src="{% static 'carsharing/images/auto_placeholder.jpg' %}" style="height: 300px" />
+                {{form.foto}}
+              </div>
+            </div>
+
           </div>
-          <input type="file" onchange="readURL(this);" />
-        </div>
-        <div style="margin-left: 72px;margin-right: 72px;">
-          <h3 class="sidebar-title">Descripción</h3>
-          <input type="text" placeholder="" />
-        </div>
+<div class="container">
+  <div class="col">
+    <div class="row">
+       <div class="col-md-12 col-sm-12">
+                <h3 class="sidebar-title">Descripción</h3>
+         {{form.descripcion}}
+       </div>
+    </div>
+  </div>
+</div>
+
         <div class="container">
           <div class="col">
             <div class="row">
               <div class="col-md-6 col-sm-6">
                 <h3 class="sidebar-title">Marca</h3>
-                <input type="text" placeholder="" />
+                {{form.marca}}
               </div>
 
               <div class="col-md-6 col-sm-6">
                 <h3 class="sidebar-title">Modelo</h3>
-                <input type="text" placeholder="" />
+                {{form.modelo}}
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 col-sm-6">
-                <h3 class="sidebar-title">Ano</h3>
-                <input type="text" placeholder="" />
+                <h3 class="sidebar-title">Año</h3>
+               {{form.año}}
               </div>
 
               <div class="col-md-6 col-sm-6">
                 <h3 class="sidebar-title">Precio por hora</h3>
-                <input type="text" placeholder="" />
+                {{form.precio}}
               </div>
             </div>
             
           </div>
         </div>
-        <div style="margin-left: 72px;">
-          <input type="submit" value="Añadir" />
-        </div>
+           <div class="container" style="padding-bottom:10px">
+  <div class="col">
+    <div class="row">
+       <div class="col-md-12 col-sm-12">
+        <h3 class="sidebar-title">Ciudad</h3>
+  <select id="cars" name="cars">
+    <option value="La Paz">La Paz</option>
+    <option value="Oruro">Oruro</option>
+    <option value="Potosi">Potosi</option>
+    <option value="Cochabamba">Cochabamba</option>
+    <option value="Tarija">Tarija</option>
+    <option value="Chuquisaca">Chuquisaca</option>
+    <option value="Santa Cruz">Santa Cruz</option>
+    <option value="Beni">Beni</option>
+    <option value="Pando">Pando</option>
+  </select>
+       </div>
+    </div>
+  </div>
+</div>
+
+        <div class="container">
+  <div class="col">
+    <div class="row">
+       <div class="col-md-12 col-sm-12">
+               <input type="submit" value="Añadir" style="font-size:20px"/>
+       </div>
+    </div>
+  </div>
+</div>
+
       </form>
     </div>
 
@@ -154,22 +196,6 @@
         </div>
       </div>
     </div>
-
-    <script>
-      function readURL(input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-
-          reader.onload = function(e) {
-            $("#blah")
-              .attr("src", e.target.result)
-              .height(200);
-          };
-
-          reader.readAsDataURL(input.files[0]);
-        }
-      }
-    </script>
     <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
 

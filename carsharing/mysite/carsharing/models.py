@@ -47,8 +47,8 @@ class Vehiculo(models.Model):
 class Alquiler(models.Model):
     vehiculo = models.ForeignKey(Vehiculo,on_delete=models.CASCADE)
     precio = models.IntegerField()
-    inicio = models.DateField()
-    final = models.DateField()
+    inicio = models.DateField(blank=True,null=True)
+    final = models.DateField(blank=True,null=True)
 
     def __str__(self):
         return str(self.vehiculo)
