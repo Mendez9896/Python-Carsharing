@@ -15,6 +15,7 @@ class Usuario(models.Model):
     class Meta:
         verbose_name_plural = "Usuarios"
 
+
 class Ciudad(models.Model):
     nombre = models.CharField(max_length=50)
 
@@ -44,6 +45,9 @@ class Alquiler(models.Model):
     precio = models.IntegerField()
     inicio = models.DateField()
     final = models.DateField()
+
+    def __str__(self):
+        return str(self.vehiculo)
 
     class Meta:
         verbose_name_plural = "Alquileres"

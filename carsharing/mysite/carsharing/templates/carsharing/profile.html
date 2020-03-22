@@ -94,50 +94,27 @@
               alt=""
               style="width: 200px; height: 200px;"
             />
-            <h1>Juan Perez</h1>
+            <h1>{{usuario.nombre}}</h1>
             <div class="row">
+              {% for vehiculo in vehiculos %}
               <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                   <div class="product-upper" style="height: 200px;">
                     <img src="img/aut2.jpeg" alt="" style="height: 200px;" />
                   </div>
-                  <h2><a href="">Apple new mac book 2015 March :P</a></h2>
+                  <h2><a href="">{{vehiculo.0.marca}} {{vehiculo.0.modelo}}</a></h2>
                   <div class="product-carousel-price">
-                    <ins>$899.00</ins> <del>$999.00</del>
+                    <ins>{{vehiculo.1.precio}}</ins>
                   </div>
                 </div>
               </div>
-  
-              <div class="col-md-3 col-sm-6">
-                <div class="single-shop-product">
-                  <div class="product-upper" style="height: 200px;">
-                    <img src="img/auto2.jpeg" alt="" style="height: 200px;" />
-                  </div>
-                  <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                  <div class="product-carousel-price">
-                    <ins>$100.00</ins> <del></del>
-                  </div>
-                </div>
-              </div>
-  
-              <div class="col-md-3 col-sm-6">
-                <div class="single-shop-product">
-                  <div class="product-upper" style="height: 200px;">
-                    <img src="img/auto3.jpeg" alt="" style="height: 200px;" />
-                  </div>
-                  <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                  <div class="product-carousel-price">
-                    <ins>$100.00</ins> <del></del>
-                  </div>
-                </div>
-              </div>
-
+              {% endfor %}
               <div class="add_car_to_profile" style="padding-top: 70px;">
                 <a
                   class="add_to_cart_button"
-                  data-quantity="1"
+                  data-quantity=""
                   data-product_sku=""
-                  data-product_id="70"
+                  data-product_id=""
                   rel="nofollow"
                   href="add-car"
                   >+</a
