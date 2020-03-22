@@ -5,7 +5,7 @@ admin.site.site_header = 'Admin Carsharing'
 # Register your models here.
 
 class VehiculoAdmin(admin.ModelAdmin):
-    list_display = ('propietario', 'descripcion', 'marca', 'modelo', 'año','disponible','ciudad')
+    list_display = ('propietario', 'foto','descripcion', 'marca', 'modelo', 'año','disponible','ciudad')
 
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ('codigo','nombre','email','contacto','rol')

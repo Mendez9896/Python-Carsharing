@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+from setuptools.command.upload import upload
+
+
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50)
     codigo = models.AutoField(auto_created=True, primary_key=True)
@@ -26,7 +29,7 @@ class Ciudad(models.Model):
         verbose_name_plural = "Ciudades"
 
 class Vehiculo(models.Model):
-    foto = models.BinaryField()
+    foto = models.ImageField(blank=True,null=True)
     propietario = models.ForeignKey(Usuario,on_delete=models.CASCADE)
     descripcion = models.TextField()
     marca = models.CharField(max_length=50)

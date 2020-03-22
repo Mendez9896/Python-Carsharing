@@ -100,7 +100,11 @@
               <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                   <div class="product-upper" style="height: 200px;">
-                    <img src="img/aut2.jpeg" alt="" style="height: 200px;" />
+                    {% if vehiculo.0.foto %}
+                    <img src="{{ vehiculo.0.foto.url }}" alt="" style="height: 200px;" />
+                    {% else %}
+                    <img src="{% static 'carsharing/images/auto_placeholder.jpg' %}" alt="" style="height: 200px;" />
+                    {% endif %}
                   </div>
                   <h2><a href="">{{vehiculo.0.marca}} {{vehiculo.0.modelo}}</a></h2>
                   <div class="product-carousel-price">
@@ -109,8 +113,15 @@
                 </div>
               </div>
               {% endfor %}
-              <div class="add_car_to_profile" style="padding-top: 70px;padding-bottom:5px;">
-                <a
+               <div class="col-md-3 col-sm-6">
+                <div class="single-shop-product">
+                  <div class="product-upper" style="height: 200px;">
+                                        <img src="{% static 'carsharing/images/auto_placeholder.jpg' %}" alt="" style="height: 200px;" />
+
+                  </div>
+                  <h2><a href="">{{vehiculo.0.marca}} {{vehiculo.0.modelo}}</a></h2>
+                  <div class="product-carousel-price">
+                   <a
                   class="add_to_cart_button"
                   data-quantity=""
                   data-product_sku=""
@@ -118,7 +129,8 @@
                   rel="nofollow"
                   href="add-car"
                   >+</a
-                >
+                  </div>
+                </div>
               </div>
             </div>
           </div>
