@@ -17,6 +17,7 @@ class AddVehicle(forms.Form):
 class AddUser(forms.Form):
     nombre = forms.CharField()
     apellido = forms.CharField()
+    usuario = forms.CharField()
     email = forms.EmailField()
     contacto = forms.CharField()
     password = forms.CharField()

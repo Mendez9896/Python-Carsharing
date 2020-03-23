@@ -12,7 +12,7 @@ def index(request):
     if request.method=="POST":
         usuario=request.POST["usuario"]
         password=request.POST["password"]
-        user=Usuario.objects.filter(nombre=usuario,password=password)
+        user=Usuario.objects.filter(usuario=usuario,password=password)
         if len(user)==0:
             return HttpResponseRedirect("/")
         else:
@@ -45,6 +45,7 @@ def logIn(request):
         if form.is_valid():
             nombre = form.cleaned_data["nombre"]
             apellido = form.cleaned_data["apellido"]
+            usuario = form.cleaned_data["usuario"]
             email = form.cleaned_data["email"]
             contacto = form.cleaned_data["contacto"]
             password = form.cleaned_data["password"]
@@ -52,7 +53,7 @@ def logIn(request):
             if password != password2:
                 return HttpResponseRedirect("/sign-in")
             else:
-                usuario=Usuario(nombre=nombre,apellido=apellido,email=email,contacto=contacto,password=password,rol=True)
+                usuario=Usuario(nombre=nombre,apellido=apellido,usuario=usuario,email=email,contacto=contacto,password=password,rol=True)
                 usuario.save()
         else:
             return HttpResponseRedirect("/sign-in")

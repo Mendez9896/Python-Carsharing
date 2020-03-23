@@ -8,7 +8,7 @@ class Usuario(models.Model):
     codigo = models.AutoField(auto_created=True, primary_key=True)
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
-    usuario = models.CharField(max_length=50,default='')
+    usuario = models.CharField(max_length=50)
     email = models.EmailField()
     contacto = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
