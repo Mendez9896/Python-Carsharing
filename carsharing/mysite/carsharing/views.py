@@ -30,11 +30,12 @@ def logIn(request):
 
 def perfil(request):
     usuario = getUsuario(3)
-    ciudad = getCiudad("La Paz")
 
     if request.method == 'POST':
         form = AddVehicle(request.POST,request.FILES)
+
         if form.is_valid():
+            ciudad = getCiudad(form.cleaned_data["ciudad"])
             descripcion = form.cleaned_data["descripcion"]
             marca = form.cleaned_data["marca"]
             modelo = form.cleaned_data["modelo"]
@@ -50,7 +51,7 @@ def perfil(request):
             return HttpResponseRedirect("/perfil")
 
     list_vehiculos = getVehiculos(usuario.codigo)
-    list_alquileres = getAlquileres([vehiculo.id for vehiculo in list_vehiculos])
+    list_alquileres = reversed(getAlquileres([vehiculo.id for vehiculo in list_vehiculos]))
     vehiculos = tuple(zip(list_vehiculos,list_alquileres))
     return render(request,'carsharing/profile.html',{"usuario":usuario,"vehiculos":vehiculos})
 
