@@ -19,12 +19,12 @@ def logIn(request):
             password = form.cleaned_data["password"]
             password2 = form.cleaned_data["password2"]
             if password != password2:
-                raise form.ValidationError(
-                    "Las contraseñas no coinciden"
-                )
+                return HttpResponseRedirect("/sign-in")
             else:
                 usuario=Usuario(nombre=nombre,apellido=apellido,email=email,contacto=contacto,password=password,rol=True)
                 usuario.save()
+        else:
+            return HttpResponseRedirect("/sign-in")
 
     return render(request,'carsharing/logIn.html',{})
 
