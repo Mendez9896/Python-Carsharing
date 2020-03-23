@@ -20,4 +20,4 @@ class AddUser(forms.Form):
     email = forms.EmailField()
     contacto = forms.CharField()
     password = forms.CharField()
-
+    password2 = forms.CharField()
