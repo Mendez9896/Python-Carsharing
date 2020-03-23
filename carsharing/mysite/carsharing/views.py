@@ -3,7 +3,11 @@ from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
 from .forms import AddVehicle, AddUser
 def index(request):
-    return render(request,'carsharing/index.html',{})
+    queryset = Vehiculo.objects.all()
+    context = {
+        "oject_list": queryset
+    }
+    return render(request,'carsharing/index.html',context)
 
 def signIn(request):
     return render(request,'carsharing/signIn.html',{})
