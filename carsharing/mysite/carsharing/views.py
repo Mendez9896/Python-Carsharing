@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
-from .forms import AddVehicle
+from .forms import AddVehicle, AddUser
 def index(request):
     return render(request,'carsharing/index.html',{})
 
@@ -9,6 +9,23 @@ def signIn(request):
     return render(request,'carsharing/signIn.html',{})
 
 def logIn(request):
+    if request.method=="POST":
+        form = AddUser(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data["nombre"]
+            apellido = form.cleaned_data["apellido"]
+            email = form.cleaned_data["email"]
+            contacto = form.cleaned_data["contacto"]
+            password = form.cleaned_data["password"]
+            password2 = form.cleaned_data["password2"]
+            if password != password2:
+                raise form.ValidationError(
+                    "Las contraseñas no coinciden"
+                )
+            else:
+                usuario=Usuario(nombre=nombre,apellido=apellido,email=email,contacto=contacto,password=password,rol=True)
+                usuario.save()
+
     return render(request,'carsharing/logIn.html',{})
 
 def perfil(request):

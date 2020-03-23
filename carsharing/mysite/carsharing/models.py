@@ -5,11 +5,12 @@ from setuptools.command.upload import upload
 
 
 class Usuario(models.Model):
-    nombre = models.CharField(max_length=50)
     codigo = models.AutoField(auto_created=True, primary_key=True)
-    password = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50)
     email = models.EmailField()
-    contacto = models.IntegerField()
+    contacto = models.CharField(max_length=50)
+    password = models.CharField(max_length=20)
     rol = models.BooleanField()
 
     def __str__(self):

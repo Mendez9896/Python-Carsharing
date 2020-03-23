@@ -8,3 +8,11 @@ class AddVehicle(forms.Form):
     modelo = forms.CharField()
     año = forms.IntegerField(min_value=1980, max_value=max_año)
     precio = forms.IntegerField()
+
+class AddUser(forms.Form):
+    nombre = forms.CharField()
+    apellido = forms.CharField()
+    email = forms.EmailField()
+    contacto = forms.CharField()
+    password = forms.CharField()
+    password2 = forms.CharField()
