@@ -90,12 +90,15 @@
           style="width: 400px; align-self: center; margin-left: 400px;"
         >
           <h2 class="sidebar-title">Search Car</h2>
-          <form action="">
-            <input type="text" placeholder="Search cars..." />
-            <input type="submit" value="Search" />
-          </form>
+
         </div>
         <div class="row">
+
+	<form method="get">
+		  <input type="text" class="form-control"  placeholder="Search cars..." name="buscar" value="{{request.GET.buscar}}"/>
+           	 <input type="submit" value="Search" />
+	</form> 
+
            {% for i in oject_list %}
           <div class="col-md-3 col-sm-6">
             <div class="single-shop-product">

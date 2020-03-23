@@ -2,8 +2,17 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
 from .forms import AddVehicle, AddUser
+from django.db.models import Q
 def index(request):
-    queryset = Vehiculo.objects.all()
+    query = request.GET.get("buscar")
+    if query:
+        queryset = Vehiculo.objects.filter(
+            Q(descripcion__icontains = query) |
+            Q(marca__icontains = query) |
+            Q(modelo__icontains = query)  
+        ).distinct()
+    else:
+        queryset = Vehiculo.objects.all()
     context = {
         "oject_list": queryset
     }
