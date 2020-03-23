@@ -13,6 +13,11 @@ class AddVehicle(forms.Form):
     precio = forms.IntegerField()
     ciudad = forms.ChoiceField(choices=CIUDADES)
 
+class EditUser(forms.Form):
+    nombre = forms.CharField()
+    apellido = forms.CharField()
+    email = forms.EmailField()
+    contacto = forms.CharField()
 
 class AddUser(forms.Form):
     nombre = forms.CharField()

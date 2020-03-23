@@ -28,8 +28,7 @@
       type="text/css"
     />
 
-
-    <link rel="stylesheet" type="text/css" href="{% static 'carsharing/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'carsharing/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'carsharing/css/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'carsharing/css/owl.carousel.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'carsharing/style.css' %}">
@@ -64,8 +63,7 @@
               <li><a href="index">Home</a></li>
               <li class="active"><a href="perfil">Perfil</a></li>
               <li>
-<!--                <a href="single-product">Single product</a>-->
-                <button onclick="location.href='{% url 'log-out'%}'">Log Out</button>
+                <a href="single-product">Single product</a>
               </li>
             </ul>
           </div>
@@ -86,61 +84,47 @@
       </div>
     </div>
 
-    <div class="perfil-area">
-      <div class="container">
-        <div class="col f-flex justify-content-center">
-          <div style="text-align: center;">
+    <div class="single-sidebar" style="align-self: center; ">
+      <form action="/perfil" method="post" enctype="multipart/form-data" style="align: center">
+        {% csrf_token %}
+        <div class="container" style="padding-top: 20px">
+          <div class="col">
             <div class="row">
-            <img
-              src="{% static 'carsharing/img/perfil.png' %}"
-              alt=""
-              style="width: 200px; height: 200px;"
-            />
-              <a class="btn btn-success" href="editar-user" role="button">Editar</a>
-
-            </div>
-            <h1>{{usuario.nombre}} {{usuario.apellido}}</h1>
-            <div class="row">
-              {% for vehiculo in vehiculos %}
-              <div class="col-md-3 col-sm-6">
-                <div class="single-shop-product">
-                  <div class="product-upper" style="height: 200px;">
-                    {% if vehiculo.0.foto %}
-                    <img src="{{ vehiculo.0.foto.url }}" alt="" style="height: 200px;" />
-                    {% else %}
-                    <img src="{% static 'carsharing/images/auto_placeholder.jpg' %}" alt="" style="height: 200px;" />
-                    {% endif %}
-                  </div>
-                  <h2><a href="">{{vehiculo.0.marca}} {{vehiculo.0.modelo}}</a></h2>
-                  <div class="product-carousel-price">
-                    <ins>{{vehiculo.1.precio}} Bs/hora</ins>
-                  </div>
-                </div>
+              <div class="col-md-6 col-sm-6">
+                <h3 class="sidebar-title">Nombre</h3>
+                {{form.nombre}}
               </div>
-              {% endfor %}
-               <div class="col-md-3 col-sm-6">
-                <div class="single-shop-product">
-                  <div class="product-upper" style="height: 200px;">
-                                        <img src="{% static 'carsharing/images/auto_placeholder.jpg' %}" alt="" style="height: 200px;" />
 
-                  </div>
-                  <h2><a href="">{{vehiculo.0.marca}} {{vehiculo.0.modelo}}</a></h2>
-                  <div class="product-carousel-price">
-                   <a
-                  class="add_to_cart_button"
-                  data-quantity=""
-                  data-product_sku=""
-                  data-product_id=""
-                  rel="nofollow"
-                  href="add-car"
-                  >+</a>
-                  </div>
-                </div>
+              <div class="col-md-6 col-sm-6">
+                <h3 class="sidebar-title">Apellido</h3>
+                {{form.apellido}}
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <h3 class="sidebar-title">Email</h3>
+               {{form.email}}
+              </div>
+
+              <div class="col-md-6 col-sm-6">
+                <h3 class="sidebar-title">Contacto</h3>
+                {{form.contacto}}
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
+        <div class="container" style="padding-top:10px">
+  <div class="col">
+    <div class="row">
+       <div class="col-md-12 col-sm-12">
+               <input type="submit" value="Editar" style="font-size:20px"/>
+       </div>
+    </div>
+  </div>
+</div>
+
+      </form>
     </div>
 
     <div class="footer-top-area" style="height: 350px;">
@@ -168,14 +152,25 @@
         </div>
       </div>
     </div>
-
+    <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $("#vehiculo")
+              .attr("src", e.target.result);
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    </script>
     <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
 
     <!-- Bootstrap JS form CDN -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-    <!-- jQuery sticky menu -->
+  <!-- jQuery sticky menu -->
     <script src="{% static 'carsharing/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'carsharing/js/jquery.sticky.js' %}"></script>
 
