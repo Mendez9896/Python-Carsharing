@@ -12,3 +12,12 @@ class AddVehicle(forms.Form):
     año = forms.IntegerField(min_value=1980, max_value=max_año)
     precio = forms.IntegerField()
     ciudad = forms.ChoiceField(choices=CIUDADES)
+
+
+class AddUser(forms.Form):
+    nombre = forms.CharField()
+    apellido = forms.CharField()
+    email = forms.EmailField()
+    contacto = forms.CharField()
+    password = forms.CharField()
+
