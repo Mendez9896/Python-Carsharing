@@ -6,7 +6,6 @@ from django.db.models import Q
 
 def logOut(request):
     request.session['code']=-1
-    print(f"{request.session['code']}") 
     return render(request,'carsharing/logIn.html',{})
 
 def index(request):   
@@ -20,8 +19,7 @@ def index(request):
             request.session['code']=user[0].codigo
             return HttpResponseRedirect("/index")
     else:  
-        if 'code' in request.session and request.session['code']!=-1:  
-            print(f"{request.session['code']}") 
+        if 'code' in request.session and request.session['code']!=-1:
             query = request.GET.get("buscar")
             if query:
                 queryset = Vehiculo.objects.filter(
