@@ -1,22 +1,42 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
 from .forms import AddVehicle, AddUser
 from django.db.models import Q
-def index(request):
-    query = request.GET.get("buscar")
-    if query:
-        queryset = Vehiculo.objects.filter(
-            Q(descripcion__icontains = query) |
-            Q(marca__icontains = query) |
-            Q(modelo__icontains = query)  
-        ).distinct()
-    else:
-        queryset = Vehiculo.objects.all()
-    context = {
-        "oject_list": queryset
-    }
-    return render(request,'carsharing/index.html',context)
+
+def logOut(request):
+    request.session['code']=-1
+    print(f"{request.session['code']}") 
+    return render(request,'carsharing/logIn.html',{})
+
+def index(request):   
+    if request.method=="POST":
+        usuario=request.POST["usuario"]
+        password=request.POST["password"]
+        user=Usuario.objects.filter(nombre=usuario,password=password)
+        if len(user)==0:
+            return HttpResponseRedirect("/")
+        else:
+            request.session['code']=user[0].codigo
+            return HttpResponseRedirect("/index")
+    else:  
+        if 'code' in request.session and request.session['code']!=-1:  
+            print(f"{request.session['code']}") 
+            query = request.GET.get("buscar")
+            if query:
+                queryset = Vehiculo.objects.filter(
+                    Q(descripcion__icontains = query) |
+                    Q(marca__icontains = query) |
+                    Q(modelo__icontains = query)  
+                ).distinct()
+            else:
+                queryset = Vehiculo.objects.all()
+            context = {
+                "oject_list": queryset
+            }
+            return render(request,'carsharing/index.html',context)
+        else:
+            return HttpResponseRedirect("/")
 
 def signIn(request):
     return render(request,'carsharing/signIn.html',{})
