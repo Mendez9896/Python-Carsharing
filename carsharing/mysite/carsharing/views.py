@@ -60,7 +60,8 @@ def logIn(request):
     return render(request,'carsharing/logIn.html',{})
 
 def perfil(request):
-    usuario = getUsuario(3)
+    if 'code' in request.session and request.session['code']!=-1:
+        usuario = getUsuario(request.session['code'])
 
     if request.method == 'POST':
         form = AddVehicle(request.POST,request.FILES)
