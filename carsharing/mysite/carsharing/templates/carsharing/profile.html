@@ -64,7 +64,8 @@
               <li><a href="index">Home</a></li>
               <li class="active"><a href="perfil">Perfil</a></li>
               <li>
-                <a href="single-product">Single product</a>
+<!--                <a href="single-product">Single product</a>-->
+                <button onclick="location.href='{% url 'log-out'%}'">Log Out</button>
               </li>
             </ul>
           </div>
@@ -94,7 +95,7 @@
               alt=""
               style="width: 200px; height: 200px;"
             />
-            <h1>{{usuario.nombre}}</h1>
+            <h1>{{usuario.nombre}} {{usuario.apellido}}</h1>
             <div class="row">
               {% for vehiculo in vehiculos %}
               <div class="col-md-3 col-sm-6">

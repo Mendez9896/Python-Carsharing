@@ -8,7 +8,7 @@ class VehiculoAdmin(admin.ModelAdmin):
     list_display = ('propietario', 'foto','descripcion', 'marca', 'modelo', 'año','disponible','ciudad')
 
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('codigo','usuario','nombre','email','contacto','rol')
+    list_display = ('codigo','usuario','nombre','apellido','email','contacto','rol')
 
 class AlquilerAdmin(admin.ModelAdmin):
     list_display = ('vehiculo','precio','inicio','final')
