@@ -3,12 +3,17 @@ from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
 from .forms import AddVehicle, AddUser,EditUser,EditVehiculo
 from django.db.models import Q
+from django.contrib import messages
+
+def dismissWarning(request):
+    request.session['code']=0
+    return HttpResponseRedirect("/")
 
 def logOut(request):
     request.session['code']=-1
-    return render(request,'carsharing/logIn.html',{})
+    return HttpResponseRedirect("/")
 
-def index(request):   
+def index(request):
     if request.method=="POST":
         usuario=request.POST["usuario"]
         password=request.POST["password"]
@@ -20,6 +25,7 @@ def index(request):
             return HttpResponseRedirect("/index")
     else:  
         if 'code' in request.session and request.session['code']!=-1:
+            
             query = request.GET.get("buscar")
             if query:
                 queryset = Vehiculo.objects.filter(
@@ -37,9 +43,15 @@ def index(request):
             return HttpResponseRedirect("/")
 
 def signIn(request):
+    if 'invalid' in request.session and request.session['invalid']==1:
+        messages.error(request, 'Datos invalidos')
     return render(request,'carsharing/signIn.html',{})
 
 def logIn(request):
+    if request.session['code']==-1:
+        messages.warning(request, 'Sesion cerrada')
+    elif request.session['code']>0:
+        return HttpResponseRedirect("/index")
     if request.method=="POST":
         form = AddUser(request.POST)
         if form.is_valid():
@@ -56,8 +68,9 @@ def logIn(request):
                 usuario=Usuario(nombre=nombre,apellido=apellido,usuario=usuario,email=email,contacto=contacto,password=password,rol=True)
                 usuario.save()
         else:
+            request.session['invalid']=1
             return HttpResponseRedirect("/sign-in")
-
+        
     return render(request,'carsharing/logIn.html',{})
 
 def perfil(request):
@@ -111,6 +124,7 @@ def editUser(request):
         usuario = getUsuario(request.session['code'])
     form = EditUser(initial={'nombre': usuario.nombre,'apellido':usuario.apellido,'email':usuario.email,'contacto':usuario.contacto})
     return render(request,'carsharing/editar-user.html',{"form":form, "user":usuario})
+<<<<<<< HEAD
 def editVehicle(request):
     vehiculo_id = request.GET.get("vehicle")
     vehiculo = Vehiculo.objects.get(pk=vehiculo_id)
@@ -120,6 +134,12 @@ def editVehicle(request):
 
 def singleProduct(request):
     return render(request,'carsharing/single-product.html',{})
+=======
+def singleProduct(request, pk):
+    vehiculo = Vehiculo.objects.get(id = pk)
+    context = {'vehiculo': vehiculo }
+    return render(request,'carsharing/single-product.html',context)
+>>>>>>> f1ea159d29f6435a5fd7e59c88fa105d6a7d99c6
 
 def addCar(request):
     form = AddVehicle()

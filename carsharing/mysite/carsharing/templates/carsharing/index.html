@@ -62,7 +62,7 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="index">Home</a></li>
               <li><a href="perfil">Perfil</a></li>
-              <li><a href="single-product">Single product</a></li>
+   
               <button onclick="location.href='{% url 'log-out'%}'">Log Out</button>
             </ul>
           </div>
@@ -99,16 +99,13 @@
 		  <input type="text" class="form-control"  placeholder="Search cars..." name="buscar" value="{{request.GET.buscar}}"/>
            	 <input type="submit" value="Search" />
 	</form> 
+<br />
 
            {% for i in oject_list %}
           <div class="col-md-3 col-sm-6">
             <div class="single-shop-product">
               <div class="product-upper" style="height: 200px;">
-                    {% if vehiculo.0.foto %}
-                    <img src="{{ i.foto.url }}" alt="" style="height: 200px;" />
-                    {% else %}
-                    <img src="{% static 'carsharing/images/auto_placeholder.jpg' %}" alt="" style="height: 200px;" />
-                    {% endif %}
+                   <img src="{{ i.foto.url }}" alt="" style="height: 200px;" />
 
               </div>
               <h2><a href="">{{i.modelo}}</a></h2>
@@ -123,7 +120,7 @@
                   data-product_sku=""
                   data-product_id="70"
                   rel="nofollow"
-                  href="single-product"
+                  href="{% url 'single-product' i.id %}"
                   >Rentar</a
                 >
               </div>
