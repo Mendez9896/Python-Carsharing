@@ -11,13 +11,8 @@ urlpatterns = [
     path('add-car', views.addCar, name='add-car'),
     path('rent-a-car', views.rentACar, name='rent-a-car'),
     path('log-out',views.logOut,name='log-out'),
-<<<<<<< HEAD
     path('editar-user', views.editUser, name='editar-user'),
-    path('editar-vehicle', views.editVehicle, name='editar-vehicle')
-]
-=======
+    path('editar-vehicle', views.editVehicle, name='editar-vehicle'),
     path('dismissWarning',views.dismissWarning,name='dismissWarning'),
-    path('editar-user', views.editUser, name='editar-user')
-
 ]
->>>>>>> f1ea159d29f6435a5fd7e59c88fa105d6a7d99c6
+

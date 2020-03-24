@@ -124,7 +124,7 @@ def editUser(request):
         usuario = getUsuario(request.session['code'])
     form = EditUser(initial={'nombre': usuario.nombre,'apellido':usuario.apellido,'email':usuario.email,'contacto':usuario.contacto})
     return render(request,'carsharing/editar-user.html',{"form":form, "user":usuario})
-<<<<<<< HEAD
+
 def editVehicle(request):
     vehiculo_id = request.GET.get("vehicle")
     vehiculo = Vehiculo.objects.get(pk=vehiculo_id)
@@ -132,14 +132,10 @@ def editVehicle(request):
     form = EditVehiculo(initial={'id':vehiculo_id,'descripcion':vehiculo.descripcion,'precio':alquiler.precio,'ciudad':vehiculo.ciudad.nombre})
     return render(request,'carsharing/editar-vehicle.html',{"form":form,"foto":vehiculo.foto.url})
 
-def singleProduct(request):
-    return render(request,'carsharing/single-product.html',{})
-=======
 def singleProduct(request, pk):
     vehiculo = Vehiculo.objects.get(id = pk)
     context = {'vehiculo': vehiculo }
     return render(request,'carsharing/single-product.html',context)
->>>>>>> f1ea159d29f6435a5fd7e59c88fa105d6a7d99c6
 
 def addCar(request):
     form = AddVehicle()
