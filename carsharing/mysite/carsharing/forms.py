@@ -24,6 +24,8 @@ class EditVehiculo(forms.Form):
     descripcion = forms.CharField()
     precio = forms.IntegerField()
     ciudad = forms.ChoiceField(choices=CIUDADES)
+class DeleteVehiculo(forms.Form):
+    id = forms.IntegerField(widget=forms.HiddenInput())
 class AddUser(forms.Form):
     nombre = forms.CharField()
     apellido = forms.CharField()

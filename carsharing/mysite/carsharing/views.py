@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
-from .forms import AddVehicle, AddUser,EditUser,EditVehiculo
+from .forms import AddVehicle, AddUser,EditUser,EditVehiculo,DeleteVehiculo
 from django.db.models import Q
 from django.contrib import messages
 
@@ -81,6 +81,7 @@ def perfil(request):
         form = AddVehicle(request.POST,request.FILES)
         form2 = EditUser(request.POST)
         form3 = EditVehiculo(request.POST)
+        form4 = DeleteVehiculo(request.POST)
         if form.is_valid():
             ciudad = getCiudad(form.cleaned_data["ciudad"])
             descripcion = form.cleaned_data["descripcion"]
@@ -114,7 +115,8 @@ def perfil(request):
             vehiculo.save()
             alquiler.save()
             return HttpResponseRedirect("/perfil")
-
+        elif form4.is_valid():
+            Vehiculo.objects.get(pk=form4.cleaned_data["id"]).delete()
     list_vehiculos = getVehiculos(usuario.codigo)
     list_alquileres = reversed(getAlquileres([vehiculo.id for vehiculo in list_vehiculos]))
     vehiculos = tuple(zip(list_vehiculos,list_alquileres))
@@ -130,7 +132,8 @@ def editVehicle(request):
     vehiculo = Vehiculo.objects.get(pk=vehiculo_id)
     alquiler = getAlquileres([vehiculo_id])[0]
     form = EditVehiculo(initial={'id':vehiculo_id,'descripcion':vehiculo.descripcion,'precio':alquiler.precio,'ciudad':vehiculo.ciudad.nombre})
-    return render(request,'carsharing/editar-vehicle.html',{"form":form,"foto":vehiculo.foto.url})
+    formD = DeleteVehiculo(initial={'id':vehiculo_id})
+    return render(request,'carsharing/editar-vehicle.html',{"form":form,"formD":formD,"foto":vehiculo.foto.url})
 
 def singleProduct(request, pk):
     vehiculo = Vehiculo.objects.get(id = pk)
