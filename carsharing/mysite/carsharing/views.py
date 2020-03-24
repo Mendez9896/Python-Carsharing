@@ -106,6 +106,7 @@ def perfil(request):
             vehiculo = Vehiculo.objects.get(pk=form3.cleaned_data["id"])
             vehiculo.ciudad = getCiudad(form3.cleaned_data["ciudad"])
             vehiculo.descripcion = form3.cleaned_data["descripcion"]
+            vehiculo.disponible = form3.cleaned_data["disponible"]
             precio = form3.cleaned_data["precio"]
             foto = form3.cleaned_data["foto"]
             if foto:
@@ -131,7 +132,7 @@ def editVehicle(request):
     vehiculo_id = request.GET.get("vehicle")
     vehiculo = Vehiculo.objects.get(pk=vehiculo_id)
     alquiler = getAlquileres([vehiculo_id])[0]
-    form = EditVehiculo(initial={'id':vehiculo_id,'descripcion':vehiculo.descripcion,'precio':alquiler.precio,'ciudad':vehiculo.ciudad.nombre})
+    form = EditVehiculo(initial={'disponible':vehiculo.disponible,'id':vehiculo_id,'descripcion':vehiculo.descripcion,'precio':alquiler.precio,'ciudad':vehiculo.ciudad.nombre})
     formD = DeleteVehiculo(initial={'id':vehiculo_id})
     return render(request,'carsharing/editar-vehicle.html',{"form":form,"formD":formD,"foto":vehiculo.foto.url})
 
