@@ -9,8 +9,9 @@ urlpatterns = [
     path('perfil', views.perfil, name='perfil'),
     path('single-product/<str:pk>/', views.singleProduct, name='single-product'),
     path('add-car', views.addCar, name='add-car'),
-    path('rent-a-car', views.rentACar, name='rent-a-car'),
+    path('rent-a-car/<str:pk>/', views.rentACar, name='rent-a-car'),
     path('log-out',views.logOut,name='log-out'),
+    path('rentingCar/<str:pk>',views.rentingCar,name='renting-car'),
     path('dismissWarning',views.dismissWarning,name='dismissWarning'),
     path('editar-user', views.editUser, name='editar-user')
 

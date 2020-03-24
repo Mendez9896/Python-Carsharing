@@ -180,11 +180,14 @@
                       </div>
                     </div>
 
-                    <a href="{% url 'rent-a-car' %}"
-                      ><button class="add_to_cart_button" type="submit">
-                        Rentar
-                      </button></a
-                    >
+                    <a
+                    class="add_to_cart_button"
+                    data-quantity="1"
+                    data-product_sku=""
+                    data-product_id="70"
+                    rel="nofollow"
+                    href="{% url 'rent-a-car' vehiculo.id %}"
+                    >Rentar</a>
                   </div>
                 </div>
               </div>

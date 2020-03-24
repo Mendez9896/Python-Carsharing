@@ -119,8 +119,19 @@ def addCar(request):
     form = AddVehicle()
     return render(request,'carsharing/addCar.html',{"form":form})
 
-def rentACar(request):
-    return render(request,'carsharing/rentAcar.html',{})
+def rentACar(request, pk):
+    vehiculo = Vehiculo.objects.get(id = pk)
+    alquiler = Alquiler.objects.get(vehiculo = vehiculo)
+    context = {'vehiculo': vehiculo, 'alquiler': alquiler }
+    return render(request,'carsharing/rentAcar.html',context)
+
+def rentingCar(request, pk):
+    inicio=request.POST['inicio']
+    fin=request.POST['fin']
+    vehiculo = Vehiculo.objects.get(id = pk)
+    alquiler = Alquiler.objects.get(vehiculo = vehiculo)
+    return HttpResponseRedirect("/perfil")
+
 
 def getUsuario(codigo):
     return Usuario.objects.get(pk=codigo)

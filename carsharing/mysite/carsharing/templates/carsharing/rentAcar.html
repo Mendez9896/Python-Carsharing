@@ -76,11 +76,11 @@
                     <div class="col-md-6" style="width:800px;">
 
                         
-                        <div class="row  d-flex justify-content-center" style="">
+                        <div class="row  d-flex justify-content-center">
                             <div class="col-md-6" style="width: 450px;">
                                 <div class="product-images" style="width: 420px;">
                                     <div class="product-main-img" style="width: 550px; height: 300px;">
-                                        <img src="img/auto7.jpeg" alt="" style="width: 550px; height: 300px;">
+                                        <img src="{{vehiculo.foto.url}}" alt="" style="width: 550px; height: 300px;">
                                     </div>
                                     
                                 </div>
@@ -88,23 +88,22 @@
                             
                             <div class="col-sm-6">
                                 <div class="product-inner">
-                                    <h2 class="product-name">Ford Mustang</h2>
+                                    <form method="POST" action="/rentingCar/{{vehiculo.id}}">{% csrf_token %}
+                                    <h2 class="product-name">{{vehiculo.marca}} {{vehiculo.modelo}}</h2>
+                                    <h4>Precio {{alquiler.precio}} Bs.</h4>
+                                    <label for="start">fecha Inicio:</label>
+                                        <input type="date" id="start" name="inicio"
+                                        min="2020-01-01" max="2021-12-31">
+                                    <br/>
+                                    <label for="start">Fecha Fin:</label>
+                                        <input type="date" id="start" name="fin"
+                                        min="2020-01-01" max="2021-12-31">
+                                    <br/><br/>
                                     <div class="product-inner-price">
-                                        <ins>$700.00</ins> <del></del>
-                                    </div>    
-
-                                    <div class="product-inner-category">
-                                        <p> Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">Mustang</a>, <a href="">Ford</a>. </p>
-                                    </div> 
-                                    
-
+                                        <ins>Metodo de Pago</ins> <del></del>
+                                    </div>     
                                     <div id="payment" style="width: 500px;">
                                         <ul class="payment_methods methods">
-                                            <li class="payment_method_bacs">
-                                                <input type="radio" data-order_button_text="" checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs">
-                                                <label for="payment_method_bacs">Transferencia bancaria </label>
-                                             
-                                            </li>
                                             <li class="payment_method_cheque">
                                                 <input type="radio" data-order_button_text="" value="cheque" name="payment_method" class="input-radio" id="payment_method_cheque">
                                                 <label for="payment_method_cheque">Pago al recoger el vehiculo</label>
@@ -112,6 +111,10 @@
                                                     <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
                                                 </div>
                                             </li>
+                                            <li class="payment_method_bacs">
+                                                <input type="radio" data-order_button_text="" checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs">
+                                                <label for="payment_method_bacs">Transferencia bancaria </label>
+                                            </li>   
                                             <li class="payment_method_paypal">
                                                 <input type="radio" data-order_button_text="Proceed to PayPal" value="paypal" name="payment_method" class="input-radio" id="payment_method_paypal">
                                                 <label for="payment_method_paypal">PayPal <img alt="PayPal Acceptance Mark" src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png"><a title="What is PayPal?" onclick="javascript:window.open('https://www.paypal.com/gb/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;" class="about_paypal" href="https://www.paypal.com/gb/webapps/mpp/paypal-popup">What is PayPal?</a>
@@ -127,8 +130,8 @@
 
                                     </div>
                                                                         
-                                    <a  href="index.html"><button class="add_to_cart_button" type="submit">Rentar</button></a>
-  
+                                    <button class="add_to_cart_button" type="submit">Rentar</button>
+                                    </form>
                                     
                                     
                                 </div>
