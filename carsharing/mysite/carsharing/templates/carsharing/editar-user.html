@@ -63,7 +63,7 @@
               <li><a href="index">Home</a></li>
               <li class="active"><a href="perfil">Perfil</a></li>
               <li>
-  
+   
               </li>
             </ul>
           </div>
@@ -87,71 +87,38 @@
     <div class="single-sidebar" style="align-self: center; ">
       <form action="/perfil" method="post" enctype="multipart/form-data" style="align: center">
         {% csrf_token %}
-          <div class="container justify-content-center" style="align: center; padding-top: 20px; padding-bottom: 20px;">
-
-              <div class="col justify-content-center"  style="align: center;">
-                <div>
-                 <h3 class="sidebar-title">Imagen</h3>
-                </div>
-                <img id="vehiculo" src="{% static 'carsharing/images/auto_placeholder.jpg' %}" style="height: 300px" />
-                {{form.foto}}
-              </div>
-
-          </div>
-<div class="container">
-  <div class="col">
-    <div class="row">
-       <div class="col-md-12 col-sm-12">
-                <h3 class="sidebar-title">Descripción</h3>
-         {{form.descripcion}}
-       </div>
-    </div>
-  </div>
-</div>
-
-        <div class="container">
+        <div class="container" style="padding-top: 20px">
           <div class="col">
             <div class="row">
               <div class="col-md-6 col-sm-6">
-                <h3 class="sidebar-title">Marca</h3>
-                {{form.marca}}
+                <h3 class="sidebar-title">Nombre</h3>
+                {{form.nombre}}
               </div>
 
               <div class="col-md-6 col-sm-6">
-                <h3 class="sidebar-title">Modelo</h3>
-                {{form.modelo}}
+                <h3 class="sidebar-title">Apellido</h3>
+                {{form.apellido}}
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 col-sm-6">
-                <h3 class="sidebar-title">Año</h3>
-               {{form.año}}
+                <h3 class="sidebar-title">Email</h3>
+               {{form.email}}
               </div>
 
               <div class="col-md-6 col-sm-6">
-                <h3 class="sidebar-title">Precio por hora</h3>
-                {{form.precio}}
+                <h3 class="sidebar-title">Contacto</h3>
+                {{form.contacto}}
               </div>
             </div>
-            
+
           </div>
         </div>
-           <div class="container" style="padding-bottom:10px">
-  <div class="col" style="padding-top:10px">
-    <div class="row">
-       <div class="col-md-12 col-sm-12">
-        <h3 class="sidebar-title">Ciudad</h3>
-         {{form.ciudad}}
-       </div>
-    </div>
-  </div>
-</div>
-
         <div class="container" style="padding-top:10px">
   <div class="col">
     <div class="row">
        <div class="col-md-12 col-sm-12">
-               <input type="submit" value="Añadir" style="font-size:20px"/>
+               <input type="submit" value="Editar" style="font-size:20px"/>
        </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
-from .forms import AddVehicle, AddUser
+from .forms import AddVehicle, AddUser,EditUser
 from django.db.models import Q
 from django.contrib import messages
 
@@ -79,7 +79,6 @@ def perfil(request):
 
     if request.method == 'POST':
         form = AddVehicle(request.POST,request.FILES)
-
         if form.is_valid():
             ciudad = getCiudad(form.cleaned_data["ciudad"])
             descripcion = form.cleaned_data["descripcion"]
@@ -88,21 +87,33 @@ def perfil(request):
             año = form.cleaned_data["año"]
             precio = form.cleaned_data["precio"]
             foto = form.cleaned_data["foto"]
-
             vehiculo = Vehiculo(foto=foto,descripcion=descripcion,marca=marca,modelo=modelo,año=año,disponible=True,propietario=usuario,ciudad=ciudad)
             vehiculo.save()
-
             alquiler = Alquiler(vehiculo=vehiculo,precio=precio)
             alquiler.save()
             return HttpResponseRedirect("/perfil")
-
+    if request.method == 'POST':
+        form = EditUser(request.POST)
+        if form.is_valid():
+            usuario.nombre = form.cleaned_data['nombre']
+            usuario.apellido = form.cleaned_data['apellido']
+            usuario.contacto = form.cleaned_data['contacto']
+            usuario.email = form.cleaned_data['email']
+            usuario.save()
+            return HttpResponseRedirect("/perfil")
     list_vehiculos = getVehiculos(usuario.codigo)
     list_alquileres = reversed(getAlquileres([vehiculo.id for vehiculo in list_vehiculos]))
     vehiculos = tuple(zip(list_vehiculos,list_alquileres))
     return render(request,'carsharing/profile.html',{"usuario":usuario,"vehiculos":vehiculos})
-
-def singleProduct(request):
-    return render(request,'carsharing/single-product.html',{})
+def editUser(request):
+    if 'code' in request.session and request.session['code']!=-1:
+        usuario = getUsuario(request.session['code'])
+    form = EditUser(initial={'nombre': usuario.nombre,'apellido':usuario.apellido,'email':usuario.email,'contacto':usuario.contacto})
+    return render(request,'carsharing/editar-user.html',{"form":form, "user":usuario})
+def singleProduct(request, pk):
+    vehiculo = Vehiculo.objects.get(id = pk)
+    context = {'vehiculo': vehiculo }
+    return render(request,'carsharing/single-product.html',context)
 
 def addCar(request):
     form = AddVehicle()
