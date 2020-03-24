@@ -97,8 +97,10 @@ def editUser(request):
         usuario = getUsuario(request.session['code'])
     form = EditUser(initial={'nombre': usuario.nombre,'apellido':usuario.apellido,'email':usuario.email,'contacto':usuario.contacto})
     return render(request,'carsharing/editar-user.html',{"form":form, "user":usuario})
-def singleProduct(request):
-    return render(request,'carsharing/single-product.html',{})
+def singleProduct(request, pk):
+    vehiculo = Vehiculo.objects.get(id = pk)
+    context = {'vehiculo': vehiculo }
+    return render(request,'carsharing/single-product.html',context)
 
 def addCar(request):
     form = AddVehicle()
