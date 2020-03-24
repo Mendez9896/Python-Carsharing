@@ -29,7 +29,18 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	{% for message in messages %}
+	<div style="height: 50px;" class="toast notification bg-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %}" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+		<div class="toast-header">
+		<button onclick="location.href='{% url 'dismissWarning'%}'" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		</div>
+		<div style="text-align: center; font-size: large; padding-top: 10px;" class="toast-body">
+		{{message|safe}}
+		</div>
+	</div>
+	{% endfor %}
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
