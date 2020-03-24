@@ -137,6 +137,29 @@
                   </div>
                 </div>
               </div>
+
+            </div>
+            <div class="row">
+              {% if alquileres.0 %}
+              <h3>Autos Alquilados</h3>
+              {% for alquiler in alquileres %}
+              <div class="col-md-3 col-sm-6">
+                <div class="single-shop-product">
+                  <div class="product-upper" style="height: 200px;">
+                    {% if alquiler.vehiculo.foto %}
+                    <img src="{{ alquiler.vehiculo.foto.url }}" alt="" style="height: 200px;" />
+                    {% else %}
+                    <img src="{% static 'carsharing/images/auto_placeholder.jpg' %}" alt="" style="height: 200px;" />
+                    {% endif %}
+                  </div>
+                  <div class="product-carousel-price">
+                    <h2><a href="">{{alquiler.vehiculo.marca}} {{alquiler.vehiculo.modelo}}</a></h2>
+                    <ins>{{alquiler.vehiculo.año}}</ins>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              {% endif %}
             </div>
           </div>
         </div>

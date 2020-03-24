@@ -48,9 +48,9 @@ def signIn(request):
     return render(request,'carsharing/signIn.html',{})
 
 def logIn(request):
-    if request.session['code']==-1:
+    if 'code' in request.session and request.session['code']==-1:
         messages.warning(request, 'Sesion cerrada')
-    elif request.session['code']>0:
+    elif 'code' in request.session and request.session['code']>0:
         return HttpResponseRedirect("/index")
     if request.method=="POST":
         form = AddUser(request.POST)
@@ -65,7 +65,7 @@ def logIn(request):
             if password != password2:
                 return HttpResponseRedirect("/sign-in")
             else:
-                usuario=Usuario(nombre=nombre,apellido=apellido,usuario=usuario,email=email,contacto=contacto,password=password,rol=True)
+                usuario=Usuario(nombre=nombre,apellido=apellido,usuario=usuario,email=email,contacto=contacto,password=password, rol=True)
                 usuario.save()
         else:
             request.session['invalid']=1
@@ -121,7 +121,8 @@ def perfil(request):
     list_vehiculos = getVehiculos(usuario.codigo)
     list_alquileres = reversed(getAlquileres([vehiculo.id for vehiculo in list_vehiculos]))
     vehiculos = tuple(zip(list_vehiculos,list_alquileres))
-    return render(request,'carsharing/profile.html',{"usuario":usuario,"vehiculos":vehiculos})
+    list_owned_alquileres = getAlquileresByClient(usuario)
+    return render(request,'carsharing/profile.html',{"usuario":usuario,"vehiculos":vehiculos,"alquileres": list_owned_alquileres})
 def editUser(request):
     if 'code' in request.session and request.session['code']!=-1:
         usuario = getUsuario(request.session['code'])
@@ -156,6 +157,12 @@ def rentingCar(request, pk):
     fin=request.POST['fin']
     vehiculo = Vehiculo.objects.get(id = pk)
     alquiler = Alquiler.objects.get(vehiculo = vehiculo)
+    alquiler.inicio=inicio
+    alquiler.final=fin
+    alquiler.cliente=getUsuario(request.session['code'])
+    vehiculo.disponible=False
+    vehiculo.save()
+    alquiler.save()
     return HttpResponseRedirect("/perfil")
 
 
@@ -165,5 +172,7 @@ def getVehiculos(codigo_propietario):
     return Vehiculo.objects.filter(propietario_id=codigo_propietario)
 def getAlquileres(vehiculos_ids):
     return  Alquiler.objects.filter(vehiculo_id__in=vehiculos_ids)
+def getAlquileresByClient(cliente):
+    return Alquiler.objects.filter(cliente=cliente)
 def getCiudad(nombre_ciudad):
     return Ciudad.objects.filter(nombre=nombre_ciudad)[0]

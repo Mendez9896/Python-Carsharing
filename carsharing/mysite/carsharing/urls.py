@@ -13,7 +13,7 @@ urlpatterns = [
     path('log-out',views.logOut,name='log-out'),
     path('rentingCar/<str:pk>',views.rentingCar,name='renting-car'),
     path('editar-user', views.editUser, name='editar-user'),
-    path('editar-vehicle', views.editVehicle, name='editar-vehicle'),W
+    path('editar-vehicle', views.editVehicle, name='editar-vehicle'),
     path('dismissWarning',views.dismissWarning,name='dismissWarning'),
 ]
 

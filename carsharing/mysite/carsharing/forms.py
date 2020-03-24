@@ -18,6 +18,7 @@ class EditUser(forms.Form):
     apellido = forms.CharField()
     email = forms.EmailField()
     contacto = forms.CharField()
+
 class EditVehiculo(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
     foto = forms.ImageField(required=False,allow_empty_file=True, widget=forms.FileInput(attrs={'onchange': "readURL(this);"}))
@@ -35,3 +36,7 @@ class AddUser(forms.Form):
     contacto = forms.CharField()
     password = forms.CharField()
     password2 = forms.CharField()
+
+class RentCar(forms.Form):
+    inicio = forms.DateField()
+    fin = forms.DateField()

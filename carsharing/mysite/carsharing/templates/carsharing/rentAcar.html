@@ -91,7 +91,7 @@
                                     <form method="POST" action="/rentingCar/{{vehiculo.id}}">{% csrf_token %}
                                     <h2 class="product-name">{{vehiculo.marca}} {{vehiculo.modelo}}</h2>
                                     <h4>Precio {{alquiler.precio}} Bs.</h4>
-                                    <label for="start">fecha Inicio:</label>
+                                    <label for="start">Fecha Inicio:</label>
                                         <input type="date" id="start" name="inicio"
                                         min="2020-01-01" max="2021-12-31">
                                     <br/>
