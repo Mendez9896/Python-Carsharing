@@ -12,7 +12,8 @@ urlpatterns = [
     path('rent-a-car/<str:pk>/', views.rentACar, name='rent-a-car'),
     path('log-out',views.logOut,name='log-out'),
     path('rentingCar/<str:pk>',views.rentingCar,name='renting-car'),
+    path('editar-user', views.editUser, name='editar-user'),
+    path('editar-vehicle', views.editVehicle, name='editar-vehicle'),W
     path('dismissWarning',views.dismissWarning,name='dismissWarning'),
-    path('editar-user', views.editUser, name='editar-user')
-
 ]
+

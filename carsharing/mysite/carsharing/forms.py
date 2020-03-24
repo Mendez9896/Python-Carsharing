@@ -18,7 +18,15 @@ class EditUser(forms.Form):
     apellido = forms.CharField()
     email = forms.EmailField()
     contacto = forms.CharField()
-
+class EditVehiculo(forms.Form):
+    id = forms.IntegerField(widget=forms.HiddenInput())
+    foto = forms.ImageField(required=False,allow_empty_file=True, widget=forms.FileInput(attrs={'onchange': "readURL(this);"}))
+    descripcion = forms.CharField()
+    precio = forms.IntegerField()
+    disponible = forms.BooleanField(required=False)
+    ciudad = forms.ChoiceField(choices=CIUDADES)
+class DeleteVehiculo(forms.Form):
+    id = forms.IntegerField(widget=forms.HiddenInput())
 class AddUser(forms.Form):
     nombre = forms.CharField()
     apellido = forms.CharField()

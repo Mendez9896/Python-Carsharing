@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
-from .forms import AddVehicle, AddUser,EditUser
+from .forms import AddVehicle, AddUser,EditUser,EditVehiculo,DeleteVehiculo
 from django.db.models import Q
 from django.contrib import messages
 
@@ -79,6 +79,9 @@ def perfil(request):
 
     if request.method == 'POST':
         form = AddVehicle(request.POST,request.FILES)
+        form2 = EditUser(request.POST)
+        form3 = EditVehiculo(request.POST)
+        form4 = DeleteVehiculo(request.POST)
         if form.is_valid():
             ciudad = getCiudad(form.cleaned_data["ciudad"])
             descripcion = form.cleaned_data["descripcion"]
@@ -92,15 +95,29 @@ def perfil(request):
             alquiler = Alquiler(vehiculo=vehiculo,precio=precio)
             alquiler.save()
             return HttpResponseRedirect("/perfil")
-    if request.method == 'POST':
-        form = EditUser(request.POST)
-        if form.is_valid():
-            usuario.nombre = form.cleaned_data['nombre']
-            usuario.apellido = form.cleaned_data['apellido']
-            usuario.contacto = form.cleaned_data['contacto']
-            usuario.email = form.cleaned_data['email']
+        elif form2.is_valid():
+            usuario.nombre = form2.cleaned_data['nombre']
+            usuario.apellido = form2.cleaned_data['apellido']
+            usuario.contacto = form2.cleaned_data['contacto']
+            usuario.email = form2.cleaned_data['email']
             usuario.save()
             return HttpResponseRedirect("/perfil")
+        elif form3.is_valid():
+            vehiculo = Vehiculo.objects.get(pk=form3.cleaned_data["id"])
+            vehiculo.ciudad = getCiudad(form3.cleaned_data["ciudad"])
+            vehiculo.descripcion = form3.cleaned_data["descripcion"]
+            vehiculo.disponible = form3.cleaned_data["disponible"]
+            precio = form3.cleaned_data["precio"]
+            foto = form3.cleaned_data["foto"]
+            if foto:
+                vehiculo.foto = foto
+            alquiler = getAlquileres([form3.cleaned_data["id"]])[0]
+            alquiler.precio = precio
+            vehiculo.save()
+            alquiler.save()
+            return HttpResponseRedirect("/perfil")
+        elif form4.is_valid():
+            Vehiculo.objects.get(pk=form4.cleaned_data["id"]).delete()
     list_vehiculos = getVehiculos(usuario.codigo)
     list_alquileres = reversed(getAlquileres([vehiculo.id for vehiculo in list_vehiculos]))
     vehiculos = tuple(zip(list_vehiculos,list_alquileres))
@@ -110,6 +127,15 @@ def editUser(request):
         usuario = getUsuario(request.session['code'])
     form = EditUser(initial={'nombre': usuario.nombre,'apellido':usuario.apellido,'email':usuario.email,'contacto':usuario.contacto})
     return render(request,'carsharing/editar-user.html',{"form":form, "user":usuario})
+
+def editVehicle(request):
+    vehiculo_id = request.GET.get("vehicle")
+    vehiculo = Vehiculo.objects.get(pk=vehiculo_id)
+    alquiler = getAlquileres([vehiculo_id])[0]
+    form = EditVehiculo(initial={'disponible':vehiculo.disponible,'id':vehiculo_id,'descripcion':vehiculo.descripcion,'precio':alquiler.precio,'ciudad':vehiculo.ciudad.nombre})
+    formD = DeleteVehiculo(initial={'id':vehiculo_id})
+    return render(request,'carsharing/editar-vehicle.html',{"form":form,"formD":formD,"foto":vehiculo.foto.url})
+
 def singleProduct(request, pk):
     vehiculo = Vehiculo.objects.get(id = pk)
     context = {'vehiculo': vehiculo }
