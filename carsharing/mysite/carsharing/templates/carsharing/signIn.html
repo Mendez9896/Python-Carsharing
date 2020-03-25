@@ -41,13 +41,17 @@
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="nombre">
-                                            <label class="label--desc">Nombre</label>
+                                            <div class="input--style-5">
+                                                {{form.nombre}}
+                                            </div>
+                                            <label class="label--desc">Nombres </label>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="apellido">
+                                            <div class="input--style-5">
+                                                {{form.apellido}}
+                                            </div>
                                             <label class="label--desc">Apellidos</label>
                                         </div>
                                     </div>
@@ -58,7 +62,9 @@
                             <div class="name">Usuario</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="usuario">
+                                    <div class="input--style-5">
+                                        {{form.usuario}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +72,9 @@
                             <div class="name">Email</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="email" name="email">
+                                    <div class="input--style-5">
+                                        {{form.email}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +82,9 @@
                             <div class="name">Contacto</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="contacto">
+                                    <div class="input--style-5">
+                                        {{form.contacto}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,20 +92,12 @@
                             <div class="name">Contraseña</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="password" name="password">
+                                    <div class="input--style-5">
+                                        {{form.password}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Confirmar contraseña</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="password" name="password2">
-                                </div>
-                            </div>
-                        </div>
-                    
-                        
+                        </div>        
                         <div>
                             <button class="btn btn--radius-2 btn--red" type="submit" >Registrarse</button>
                         </div>

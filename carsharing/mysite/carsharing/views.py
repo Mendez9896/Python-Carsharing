@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
-from .forms import AddVehicle, AddUser,EditUser,EditVehiculo,DeleteVehiculo
+from .forms import AddVehicle, AddUser,EditUser,EditVehiculo,DeleteVehiculo, RentCar
 from django.db.models import Q
 from django.contrib import messages
 
@@ -43,9 +43,8 @@ def index(request):
             return HttpResponseRedirect("/")
 
 def signIn(request):
-    if 'invalid' in request.session and request.session['invalid']==1:
-        messages.error(request, 'Datos invalidos')
-    return render(request,'carsharing/signIn.html',{})
+    form = AddUser()
+    return render(request,'carsharing/signIn.html',{"form":form})
 
 def logIn(request):
     if 'code' in request.session and request.session['code']==-1:
@@ -61,14 +60,9 @@ def logIn(request):
             email = form.cleaned_data["email"]
             contacto = form.cleaned_data["contacto"]
             password = form.cleaned_data["password"]
-            password2 = form.cleaned_data["password2"]
-            if password != password2:
-                return HttpResponseRedirect("/sign-in")
-            else:
-                usuario=Usuario(nombre=nombre,apellido=apellido,usuario=usuario,email=email,contacto=contacto,password=password, rol=True)
-                usuario.save()
+            usuario=Usuario(nombre=nombre,apellido=apellido,usuario=usuario,email=email,contacto=contacto,password=password, rol=True)
+            usuario.save()    
         else:
-            request.session['invalid']=1
             return HttpResponseRedirect("/sign-in")
         
     return render(request,'carsharing/logIn.html',{})
@@ -123,6 +117,7 @@ def perfil(request):
     vehiculos = tuple(zip(list_vehiculos,list_alquileres))
     list_owned_alquileres = getAlquileresByClient(usuario)
     return render(request,'carsharing/profile.html',{"usuario":usuario,"vehiculos":vehiculos,"alquileres": list_owned_alquileres})
+
 def editUser(request):
     if 'code' in request.session and request.session['code']!=-1:
         usuario = getUsuario(request.session['code'])
@@ -147,9 +142,10 @@ def addCar(request):
     return render(request,'carsharing/addCar.html',{"form":form})
 
 def rentACar(request, pk):
+    form = RentCar()
     vehiculo = Vehiculo.objects.get(id = pk)
     alquiler = Alquiler.objects.get(vehiculo = vehiculo)
-    context = {'vehiculo': vehiculo, 'alquiler': alquiler }
+    context = {'vehiculo': vehiculo, 'alquiler': alquiler, "form": form}
     return render(request,'carsharing/rentAcar.html',context)
 
 def rentingCar(request, pk):

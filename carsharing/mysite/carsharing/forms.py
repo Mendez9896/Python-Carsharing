@@ -28,15 +28,19 @@ class EditVehiculo(forms.Form):
     ciudad = forms.ChoiceField(choices=CIUDADES)
 class DeleteVehiculo(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
+
 class AddUser(forms.Form):
     nombre = forms.CharField()
     apellido = forms.CharField()
     usuario = forms.CharField()
     email = forms.EmailField()
     contacto = forms.CharField()
-    password = forms.CharField()
-    password2 = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class RentCar(forms.Form):
-    inicio = forms.DateField()
-    fin = forms.DateField()
+    inicio = forms.DateField(widget=DateInput)
+    fin = forms.DateField(widget=DateInput)
+

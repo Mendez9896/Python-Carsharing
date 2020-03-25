@@ -92,12 +92,10 @@
                                     <h2 class="product-name">{{vehiculo.marca}} {{vehiculo.modelo}}</h2>
                                     <h4>Precio {{alquiler.precio}} Bs.</h4>
                                     <label for="start">Fecha Inicio:</label>
-                                        <input type="date" id="start" name="inicio"
-                                        min="2020-01-01" max="2021-12-31">
+                                        {{form.inicio}}
                                     <br/>
-                                    <label for="start">Fecha Fin:</label>
-                                        <input type="date" id="start" name="fin"
-                                        min="2020-01-01" max="2021-12-31">
+                                    <label for="start">Fecha Fin   :</label>
+                                        {{form.fin}}
                                     <br/><br/>
                                     <div class="product-inner-price">
                                         <ins>Metodo de Pago</ins> <del></del>
