@@ -43,7 +43,7 @@ def index(request):
                 queryset = Vehiculo.objects.filter(
                     (Q(descripcion__icontains = query) |
                     Q(marca__icontains = query) |
-                    Q(modelo__icontains = query)) & disponible = True  
+                    Q(modelo__icontains = query)) , disponible = True  
                 ).distinct()
             else:
                 queryset = Vehiculo.objects.filter(diponible = True)
