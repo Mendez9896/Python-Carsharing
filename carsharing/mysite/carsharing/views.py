@@ -41,12 +41,12 @@ def index(request):
             query = request.GET.get("buscar")
             if query:
                 queryset = Vehiculo.objects.filter(
-                    Q(descripcion__icontains = query) |
+                    (Q(descripcion__icontains = query) |
                     Q(marca__icontains = query) |
-                    Q(modelo__icontains = query)  
+                    Q(modelo__icontains = query)) & disponible = True  
                 ).distinct()
             else:
-                queryset = Vehiculo.objects.all()
+                queryset = Vehiculo.objects.filter(diponible = True)
             context = {
                 "oject_list": queryset
             }
