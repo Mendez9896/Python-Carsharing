@@ -23,6 +23,7 @@ from django.conf.urls import handler404, handler500
 urlpatterns = [
     path('', include('carsharing.urls')),
     path('admin/', admin.site.urls),
+    path('paypal/',include('paypal.standard.ipn.urls')),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 handler404 = 'carsharing.views.error404'

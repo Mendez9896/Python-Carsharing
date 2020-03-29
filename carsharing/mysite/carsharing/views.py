@@ -1,9 +1,14 @@
+from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Usuario,Vehiculo,Alquiler,Ciudad
 from .forms import AddVehicle, AddUser,EditUser,EditVehiculo,DeleteVehiculo, RentCar
 from django.db.models import Q
 from django.contrib import messages
+from paypal.standard.forms import PayPalPaymentsForm
 
 def error404(request, exception):
     return HttpResponseRedirect("/")
@@ -11,6 +16,13 @@ def error404(request, exception):
 def error500(request):
     return HttpResponseRedirect("/")
 
+@csrf_exempt
+def payment_done(request):
+    return render(request,'carsharing/done.html');
+@csrf_exempt
+def payment_canceled(request):
+    return render(request,'carsharing/canceled.html');
+    
 def dismissWarning(request):
     request.session['code']=0
     return HttpResponseRedirect("/")
@@ -35,12 +47,12 @@ def index(request):
             query = request.GET.get("buscar")
             if query:
                 queryset = Vehiculo.objects.filter(
-                    Q(descripcion__icontains = query) |
+                    (Q(descripcion__icontains = query) |
                     Q(marca__icontains = query) |
-                    Q(modelo__icontains = query)  
+                    Q(modelo__icontains = query)) , disponible = True  
                 ).distinct()
             else:
-                queryset = Vehiculo.objects.all()
+                queryset = Vehiculo.objects.filter(diponible = True)
             context = {
                 "oject_list": queryset
             }
@@ -165,8 +177,25 @@ def rentingCar(request, pk):
     vehiculo.disponible=False
     vehiculo.save()
     alquiler.save()
-    return HttpResponseRedirect("/perfil")
+    request.session['precio'] = alquiler.precio
+    return HttpResponseRedirect("/payment-process")
 
+def paymentProcess(request):
+    precio = request.session.get('precio')/6.95
+    host = request.get_host()
+    paypal_dict ={
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': precio,
+        'item_name': 'Alquiler',
+        'invoice': '123',
+        'currency_code': 'USD',
+        'notify_url': 'http://{}{}'.format(host,reverse('paypal-ipn')),
+        'return_url':'http://{}{}'.format(host,'carsharing/done.html'),
+        'cancel_url': 'http://{}{}'.format(host, 'carsharing/canceled.html')
+    }
+    form = PayPalPaymentsForm(initial=paypal_dict)
+
+    return render(request,'carsharing/paymentProcess.html',{"form":form})
 
 def getUsuario(codigo):
     return Usuario.objects.get(pk=codigo)

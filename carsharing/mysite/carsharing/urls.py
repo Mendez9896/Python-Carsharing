@@ -19,6 +19,10 @@ urlpatterns = [
     path('editar-user', views.editUser, name='editar-user'),
     path('editar-vehicle', views.editVehicle, name='editar-vehicle'),
     path('dismissWarning',views.dismissWarning,name='dismissWarning'),
+    path('payment-process',views.paymentProcess,name='paymentProcess'),
+    path('done', views.payment_done, name='done'),
+    path('canceled', views.payment_canceled, name='canceled'),
+
 ]
 
 

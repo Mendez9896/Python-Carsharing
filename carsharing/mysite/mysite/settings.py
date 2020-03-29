@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'carsharing'
+    'carsharing',
+    'paypal.standard.ipn'
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
+
+
+PAYPAL_RECEIVER_EMAIL = 'mateoaltamiranovega1998@gmail.com'
+PAYPAL_TEST = True
