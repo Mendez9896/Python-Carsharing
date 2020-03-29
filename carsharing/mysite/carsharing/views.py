@@ -5,6 +5,12 @@ from .forms import AddVehicle, AddUser,EditUser,EditVehiculo,DeleteVehiculo, Ren
 from django.db.models import Q
 from django.contrib import messages
 
+def error404(request, exception):
+    return HttpResponseRedirect("/")
+
+def error500(request):
+    return HttpResponseRedirect("/")
+
 def dismissWarning(request):
     request.session['code']=0
     return HttpResponseRedirect("/")

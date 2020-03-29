@@ -1,6 +1,10 @@
 from django.urls import path
 
 from . import views
+from django.conf.urls import handler404, handler500
+
+
+
 
 urlpatterns = [
     path('index', views.index, name='index'),
@@ -16,4 +20,5 @@ urlpatterns = [
     path('editar-vehicle', views.editVehicle, name='editar-vehicle'),
     path('dismissWarning',views.dismissWarning,name='dismissWarning'),
 ]
+
 
