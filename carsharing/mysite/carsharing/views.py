@@ -52,7 +52,7 @@ def index(request):
                     Q(modelo__icontains = query)) , disponible = True  
                 ).distinct()
             else:
-                queryset = Vehiculo.objects.filter(diponible = True)
+                queryset = Vehiculo.objects.filter(disponible = True)
             context = {
                 "oject_list": queryset
             }
