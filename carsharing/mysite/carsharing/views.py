@@ -152,7 +152,8 @@ def editVehicle(request):
 
 def singleProduct(request, pk):
     vehiculo = Vehiculo.objects.get(id = pk)
-    context = {'vehiculo': vehiculo }
+    propietario = getUsuario(str(vehiculo.propietario))
+    context = {'vehiculo': vehiculo ,'contacto':propietario}
     return render(request,'carsharing/single-product.html',context)
 
 def addCar(request):
